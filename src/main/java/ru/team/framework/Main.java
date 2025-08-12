@@ -11,16 +11,28 @@ public class Main {
         CLIExpenseController cliExpenseController = context.getBean(CLIExpenseController.class);
 
 
+
+//        cliExpenseController.add("dinner", 20, Currency.USD, "eat");
+//        cliExpenseController.add("lunch", 10, Currency.USD, "eat");
+//        cliExpenseController.add("breakfast", 15, Currency.RUB, "eat");
+//        cliExpenseController.add("spa", 30, Currency.EUR, "relax");
+//        cliExpenseController.add("gta6", 250, Currency.RUB, "games");
+//        cliExpenseController.add("gta6", 250, Currency.CNY, "games");
+
 //        cliExpenseController.add("dinner", 20, "eat");
 //        cliExpenseController.add("lunch", 10, "eat");
 //        cliExpenseController.add("breakfast", 15, "eat");
 //        cliExpenseController.add("spa", 30, "relax");
-//        cliExpenseController.add("gta6", 250, "games");
+        cliExpenseController.add("gta6", 250, Currency.JPY, "games");
 
 //        cliExpenseController.list().forEach((id, expense) -> {
 //            System.out.printf("%d -> %s\n", id, expense);
 //        });
 
-//        cliExpenseController.update(3, "ps4", 1000);
+        cliExpenseController.list(Currency.JPY).forEach((id, currency) -> {
+            System.out.printf("%d: %s\n", id, currency);
+        });
+
+//        cliExpenseController.remove(3);
     }
 }

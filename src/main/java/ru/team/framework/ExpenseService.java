@@ -19,6 +19,8 @@ public abstract class ExpenseService {
 
     abstract Map<Integer, Expense> getByCategory(String category);
 
+    abstract Map<Integer, Expense> getByCurrency(Currency currency);
+
     abstract Map<Integer, Expense> getByMonth(String month);
 
     abstract boolean remove(int id);

@@ -81,21 +81,7 @@ public class JsonExpenseRepository extends ExpenseRepository {
     public Map<Integer, Expense> load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
-            Map<Integer, Expense> expenses = new TreeMap<>();
-            reader.lines().forEach(line -> {
-
-                String[] expenseData = line.split(";");
-
-                int id = Integer.parseInt(expenseData[0].split("=")[1]);
-                String description = expenseData[1].split("=")[1];
-                int amount = Integer.parseInt(expenseData[2].split("=")[1]);
-                LocalDateTime date = LocalDateTime.parse(expenseData[3].split("=")[1], formatter);
-                String category = expenseData[4].split("=")[1];
-
-                expenses.put(id, new Expense(id, description, amount, date, category));
-
-            });
-
+            Map<Integer, Expense> expenses = Expense.parse(reader.lines());
             publisher.publishEvent(new LoggingEvent(expenses, ActionType.LOAD));
             return expenses;
 

@@ -16,6 +16,7 @@ public class SimpleExpenseService extends ExpenseService {
         return repository.save(Map.of(expense.getId(), expense));
     }
 
+
     @Override
     public Map<Integer, Expense> getAll() {
         return repository.load();
@@ -26,6 +27,17 @@ public class SimpleExpenseService extends ExpenseService {
         Map<Integer, Expense> expenses = new TreeMap<>();
         for (Expense expense : getAll().values()) {
             if (expense.getCategory().equals(category)) {
+                expenses.put(expense.getId(), expense);
+            }
+        }
+        return expenses;
+    }
+
+    @Override
+    Map<Integer, Expense> getByCurrency(Currency currency) {
+        Map<Integer, Expense> expenses = new TreeMap<>();
+        for (Expense expense : getAll().values()) {
+            if (expense.getCurrency().equals(currency)) {
                 expenses.put(expense.getId(), expense);
             }
         }
@@ -65,10 +77,12 @@ public class SimpleExpenseService extends ExpenseService {
         return expenses;
     }
 
+
     @Override
     public boolean remove(int id) {
         return repository.delete(id);
     }
+
 
     @Override
     boolean update(int id, Expense newExpense) {

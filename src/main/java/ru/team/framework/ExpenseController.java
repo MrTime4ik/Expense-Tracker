@@ -12,13 +12,18 @@ public abstract class ExpenseController {
 
     abstract Map<Integer, Expense> list();
     abstract Map<Integer, Expense> list(String category);
+    abstract Map<Integer, Expense> list(Currency currency);
     abstract Map<Integer, Expense> listByMonth(String month);
 
     abstract boolean add(String description, int amount);
+    abstract boolean add(String description, int amount, Currency currency);
     abstract boolean add(String description, int amount, String category);
-
+    abstract boolean add(String description, int amount, Currency currency, String category);
 
     abstract boolean remove(int id);
+
     abstract boolean update(int id, String description, int amount);
+    abstract boolean update(int id, String description, int amount, Currency currency);
     abstract boolean update(int id, String description, int amount, String category);
+    abstract boolean update(int id, String description, int amount, Currency currency, String category);
 }
