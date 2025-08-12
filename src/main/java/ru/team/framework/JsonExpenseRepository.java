@@ -1,5 +1,7 @@
 package ru.team.framework;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -9,6 +11,9 @@ import java.util.*;
 
 @Repository
 public class JsonExpenseRepository extends ExpenseRepository {
+
+
+    ApplicationEventPublisher publisher;
 
     File dir = new File("E:/expenseData");
     File file = new File(dir,"expenses.json");
@@ -29,6 +34,11 @@ public class JsonExpenseRepository extends ExpenseRepository {
         }
     }
 
+    @Autowired
+    public JsonExpenseRepository(ApplicationEventPublisher publisher) {
+        this.publisher = publisher;
+    }
+
     @Override
     public boolean save(Map<Integer, Expense> expenses) {
 
@@ -43,6 +53,7 @@ public class JsonExpenseRepository extends ExpenseRepository {
                 for(Expense expense : allExpenses.values()) {
                     fw.append(expense.toString()).append("\n");
                 }
+                publisher.publishEvent(new LoggingEvent(expenses, ActionType.SAVE));
                 return true;
 
             } catch (IOException e) {
@@ -57,6 +68,7 @@ public class JsonExpenseRepository extends ExpenseRepository {
                 for(Expense expense : allExpenses.values()) {
                     fw.append(expense.toString()).append("\n");
                 }
+                publisher.publishEvent(new LoggingEvent(expenses, ActionType.SAVE));
                 return true;
 
             } catch (IOException e) {
@@ -83,6 +95,8 @@ public class JsonExpenseRepository extends ExpenseRepository {
                 expenses.put(id, new Expense(id, description, amount, date, category));
 
             });
+
+            publisher.publishEvent(new LoggingEvent(expenses, ActionType.LOAD));
             return expenses;
 
         } catch (IOException e) {
@@ -93,10 +107,10 @@ public class JsonExpenseRepository extends ExpenseRepository {
     @Override
     public boolean delete(int id) {
         Map<Integer, Expense> expenses = load();
-
         expenses.remove(id);
-
         save(expenses);
+
+        publisher.publishEvent(new LoggingEvent(expenses, ActionType.DELETE));
         return true;
     }
 
@@ -106,6 +120,8 @@ public class JsonExpenseRepository extends ExpenseRepository {
         expenses.remove(id);
         expenses.put(id, newExpense);
         save(expenses);
+
+        publisher.publishEvent(new LoggingEvent(expenses, ActionType.UPDATE));
         return true;
     }
 

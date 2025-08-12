@@ -15,7 +15,11 @@ public class Main {
 //        cliExpenseController.add("lunch", 10, "eat");
 //        cliExpenseController.add("breakfast", 15, "eat");
 //        cliExpenseController.add("spa", 30, "relax");
-        cliExpenseController.add("gta6", 250, "games");
+//        cliExpenseController.add("gta6", 250, "games");
+
+//        cliExpenseController.list().forEach((id, expense) -> {
+//            System.out.printf("%d -> %s\n", id, expense);
+//        });
 
 //        cliExpenseController.update(3, "ps4", 1000);
     }
