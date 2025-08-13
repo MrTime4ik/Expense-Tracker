@@ -2,6 +2,9 @@ package ru.team.framework;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.team.framework.config.AppConf;
+import ru.team.framework.controller.CLIExpenseController;
+import ru.team.framework.enums.Currency;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,7 +26,7 @@ public class Main {
 //        cliExpenseController.add("lunch", 10, "eat");
 //        cliExpenseController.add("breakfast", 15, "eat");
 //        cliExpenseController.add("spa", 30, "relax");
-        cliExpenseController.add("gta6", 250, Currency.JPY, "games");
+//        cliExpenseController.add("gta6", 250, Currency.JPY, "games");
 
 //        cliExpenseController.list().forEach((id, expense) -> {
 //            System.out.printf("%d -> %s\n", id, expense);

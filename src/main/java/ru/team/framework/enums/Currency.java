@@ -1,4 +1,4 @@
-package ru.team.framework;
+package ru.team.framework.enums;
 
 public enum Currency {
 

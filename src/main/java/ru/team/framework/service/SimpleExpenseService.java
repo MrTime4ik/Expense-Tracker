@@ -1,11 +1,9 @@
-package ru.team.framework;
+package ru.team.framework.service;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import ru.team.framework.enums.Currency;
+import ru.team.framework.entity.Expense;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -34,7 +32,7 @@ public class SimpleExpenseService extends ExpenseService {
     }
 
     @Override
-    Map<Integer, Expense> getByCurrency(Currency currency) {
+    public Map<Integer, Expense> getByCurrency(Currency currency) {
         Map<Integer, Expense> expenses = new TreeMap<>();
         for (Expense expense : getAll().values()) {
             if (expense.getCurrency().equals(currency)) {
@@ -85,7 +83,7 @@ public class SimpleExpenseService extends ExpenseService {
 
 
     @Override
-    boolean update(int id, Expense newExpense) {
+    public boolean update(int id, Expense newExpense) {
         return repository.update(id, newExpense);
     }
 }

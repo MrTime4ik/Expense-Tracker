@@ -1,11 +1,9 @@
-package ru.team.framework;
+package ru.team.framework.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ru.team.framework.enums.Currency;
+import ru.team.framework.entity.Expense;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,7 +20,7 @@ public class CLIExpenseController extends ExpenseController {
     }
 
     @Override
-    Map<Integer, Expense> list(Currency currency) {
+    public Map<Integer, Expense> list(Currency currency) {
         return service.getByCurrency(currency);
     }
 
@@ -38,7 +36,7 @@ public class CLIExpenseController extends ExpenseController {
     }
 
     @Override
-    boolean add(String description, int amount, Currency currency) {
+    public boolean add(String description, int amount, Currency currency) {
         return service.add(new Expense(description, amount, currency));
     }
 
@@ -48,7 +46,7 @@ public class CLIExpenseController extends ExpenseController {
     }
 
     @Override
-    boolean add(String description, int amount, Currency currency, String category) {
+    public boolean add(String description, int amount, Currency currency, String category) {
         return service.add(new Expense(description, amount, currency, category));
     }
 
@@ -65,7 +63,7 @@ public class CLIExpenseController extends ExpenseController {
     }
 
     @Override
-    boolean update(int id, String description, int amount, Currency currency) {
+    public boolean update(int id, String description, int amount, Currency currency) {
         return service.update(id, new Expense(id, description, amount, currency));
     }
 
@@ -75,7 +73,7 @@ public class CLIExpenseController extends ExpenseController {
     }
 
     @Override
-    boolean update(int id, String description, int amount, Currency currency, String category) {
+    public boolean update(int id, String description, int amount, Currency currency, String category) {
         return service.update(id, new Expense(id, description, amount, currency, category));
     }
 }

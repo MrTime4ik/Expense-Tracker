@@ -1,9 +1,7 @@
-package ru.team.framework;
+package ru.team.framework.logging;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.awt.event.ActionEvent;
 
 @Component
 public class LoggingListener {

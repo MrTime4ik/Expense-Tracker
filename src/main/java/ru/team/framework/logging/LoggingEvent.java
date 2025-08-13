@@ -1,6 +1,7 @@
-package ru.team.framework;
+package ru.team.framework.logging;
 
 import org.springframework.context.ApplicationEvent;
+import ru.team.framework.enums.ActionType;
 
 public class LoggingEvent extends ApplicationEvent {
 
